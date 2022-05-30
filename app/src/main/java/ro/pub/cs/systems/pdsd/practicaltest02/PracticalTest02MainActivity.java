@@ -21,6 +21,8 @@ public class PracticalTest02MainActivity extends AppCompatActivity {
     private Spinner clientRequestDataSpinner;
     private Button clientRequestDataButton;
     private TextView requestedDataTextView;
+    private boolean serverStarted = false;
+    private Server server;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,17 @@ public class PracticalTest02MainActivity extends AppCompatActivity {
         serverStartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!serverStarted) {
+                    if (serverPortEditText.getText() != null || !String.valueOf(serverPortEditText.getText()).equals("")) {
+                        serverStarted = true;
+                        server = new Server(Integer.parseInt(serverPortEditText.getText().toString()));
+                        server.start();
+                    } else {
+                        Log.e(Constants.TAG, "Portul pentru pornirea serverului trebuie sa fie un numar");
+                    }
+                } else {
+                    Log.v(Constants.TAG, "Serverul deja a fost pornit");
+                }
             }
         });
 
@@ -43,8 +56,15 @@ public class PracticalTest02MainActivity extends AppCompatActivity {
         clientRequestDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*[TODO 14]: Ex4.a client requests data when clicked -> start client request data execution on new thread*/
-
+                if (!serverStarted) {
+                    Log.e(Constants.TAG, "Serverul nu este pornit");
+                } else {
+                    int port = Integer.parseInt(clientPortEditText.getText().toString());
+                    String ip = clientIpEditText.getText().toString();
+                    String word = clientRequestDataEditText.getText().toString();
+                    Client client = new Client(port, ip, word, requestedDataTextView);
+                    client.start();
+                }
             }
         });
 

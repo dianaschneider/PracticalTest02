@@ -4,7 +4,7 @@ plugins {
 
 android {
     compileSdk 31
-
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "ro.pub.cs.systems.pdsd.practicaltest02"
         minSdk 24
@@ -33,6 +33,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation files('libs\\httpclient-4.4.1.2.jar')
+    implementation files('libs\\jsoup-1.10.2.jar')
     implementation files('libs\\jsoup-1.10.2.jar')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
