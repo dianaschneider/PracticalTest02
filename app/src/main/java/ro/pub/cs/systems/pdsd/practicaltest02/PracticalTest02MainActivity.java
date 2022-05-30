@@ -18,7 +18,6 @@ public class PracticalTest02MainActivity extends AppCompatActivity {
     private EditText clientIpEditText;
     private EditText clientPortEditText;
     private EditText clientRequestDataEditText;
-    private Spinner clientRequestDataSpinner;
     private Button clientRequestDataButton;
     private TextView requestedDataTextView;
     private boolean serverStarted = false;
